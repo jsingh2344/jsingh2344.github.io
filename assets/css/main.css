@@ -2292,3 +2292,82 @@ h1, h2, h3, h4, h5, h6 {
     }
 
 
+:root {
+		background-color: #080e17;
+	color: white;
+	font-family: system-ui;
+}
+
+html {
+	scroll-behavior: smooth;
+	scroll-padding-top: 1rem;
+}
+
+body {
+margin: 0;
+}
+
+.slidesshow {
+	display: grid;
+	grid-template-columns: 4rem auto;
+	gap: 0.5rem;
+
+	&__thumbnail {
+		aspect-ratio: 1 / 1;
+		object-fit: cover;
+		display: block;
+	}
+
+	&__slide {
+		display: block;
+    max-height: 80vh;   /* never taller than 80% of viewport */
+    max-width: 90vw;    /* never wider than 90% of viewport */
+    width: auto !important;   /* force natural width */
+    height: auto !important;  /* force natural height */
+    margin: 0 auto;           /* center horizontally */
+    object-fit: contain;      /* makes sure it scales down inside the box */
+	}
+
+	&__dot {
+		&:active {
+			outline: solid;
+		}
+	}
+	
+	&__container {
+		gap: .5rem;
+    display: flex;
+    align-items: center;     /* vertical centering */
+    justify-content: center; /* horizontal centering */
+    min-height: 80vh;        /* same cap as images */
+}
+	
+	&__sticky {
+		position: sticky;
+		display: grid;
+		gap: .5rem;
+		top: 1rem;
+	}
+}
+
+.section {
+	max-width: 1200px;
+	margin: 1rem auto;
+	padding: 0 1rem;
+}
+
+img {
+	max-width: 100%;
+}
+
+.slidesshow__slide {
+  display: block;
+  max-width: 90vw;    /* never wider than 90% of viewport */
+  max-height: 80vh;   /* never taller than 80% of viewport */
+  width: auto;
+  height: auto;
+
+  margin: 5vh auto;   /* transparent margin, scales with screen size */
+  object-fit: contain;
+}
+
