@@ -69,71 +69,16 @@
 					</div>
 
 				<!-- Sidebar -->
-					<div id="sidebar" class="inactive">
-						<div class="inner">
-
-							<!-- Menu -->
-								<nav id="menu">
-									<header class="major">
-										<h2>Menu</h2>
-									</header>
-									<ul>
-										<li><a href=" ">Homepage</a></li>
-										<li>
-											<span class="opener">Photography</span>
-											<ul>
-												<li><a href=" /peru">Peru</a></li>
-												<li><a href="#">Wyoming</a></li>
-												<li><a href="#">Eastern US</a></li>
-											</ul>
-										</li>
-										<li>
-											<span class="opener">Paintings</span>
-											<ul>
-												<li><a href="#">Wyoming</a></li>
-												<li><a href="#">Misc.</a></li>
-											</ul>
-										</li>
-										<li>
-											<span class="opener">Programming</span>
-											<ul>
-												<li><a href="#">17v22</a></li>
-												<li><a href="#">Basketball</a></li>
-											</ul>
-										<li>										
-											<span class="opener">Trip Reports</span>
-											<ul>
-												<li><a href=" /cathedral_traverse">Cathedral Traverse</a></li>
-											</ul>
-										</li>
-									</ul>
-								</nav>
-
-							<!-- Section -->
-								
-
-							<!-- Section -->
-								<section>
-									<header class="major">
-										<h2>Get in touch</h2>
-									</header>
-
-									<ul class="contact">
-										<li class="icon solid fa-envelope"><a href="#">jaden.singh2344@gmail.com</a></li>
-										<li class="icon solid fa-phone">(202) 897-6361</li>
-										<li class="icon solid fa-home">
-										Pittsburgh, PA</li>
-									</ul>
-								</section>
-
-							<!-- Footer -->
-								<footer id="footer">
-									<p class="copyright">&copy; Jaden Singh 2025. All rights reserved.</p>
-								</footer>
-
-						</div>
-					</div>
-
+				 	<div id="sidebar_standin"></div>
+					<script>
+						fetch("/sidebar")
+							.then(response => response.text())
+							.then(data => {
+							// Insert into target element
+							document.getElementById("sidebar_standin").innerHTML = data;
+							})
+							.catch(error => console.error("Error loading HTML:", error));
+					</script>
 			</div>
 
 		<!-- Scripts -->
