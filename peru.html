@@ -39,37 +39,30 @@
 									<!-- Image -->
 									
 								</section>
-								<!-- slider test-->
+								<!-- gallery-->
 								 <section>
 									<div class="section">
-										<div class="slidesshow">
-											<aside class="slidesshow__aside">
-												<div class="slidesshow__sticky">
-													<a href="#c1" class="slidesshow__dot"> <img src="images/peru-photos/DSC_1477.jpg"  class="slidesshow__thumbnail"></a>
-													<a href="#c2" class="slidesshow__dot"> <img src="images/peru-photos/DSC_1440.jpg" class="slidesshow__thumbnail"></a>
-													<a href="#c3" class="slidesshow__dot"> <img src="images/peru-photos/DSC_1429.jpg" class="slidesshow__thumbnail"></a>
-													<a href="#c4" class="slidesshow__dot"> <img src="images/peru-photos/DSC_1430.jpg" class="slidesshow__thumbnail"></a>
-													<a href="#c5" class="slidesshow__dot"> <img src="images/peru-photos/DSC_1431.jpg" class="slidesshow__thumbnail"></a>
-													<a href="#c6" class="slidesshow__dot"> <img src="images/peru-photos/DSC_1476.jpg" class="slidesshow__thumbnail"></a>
-													<a href="#c7" class="slidesshow__dot"> <img src="images/peru-photos/DSC_1591 copy.jpg" class="slidesshow__thumbnail"></a>
-													<a href="#c8" class="slidesshow__dot"> <img src="images/peru-photos/DSC_1609 copy.jpg" class="slidesshow__thumbnail"></a>
-												</div>
-											</aside>
-											<div class="slidesshow__track">
-												<div class="slidesshow__container">
-													<img id="c1" src="images/peru-photos/DSC_1477.jpg" class="slidesshow__slide">
-													<img id="c2" src="images/peru-photos/DSC_1440.jpg" class="slidesshow__slide">
-													<img id="c3" src="images/peru-photos/DSC_1429.jpg" class="slidesshow__slide">
-													<img id="c4" src="images/peru-photos/DSC_1430.jpg" class="slidesshow__slide">
-													<img id="c5" src="images/peru-photos/DSC_1431.jpg" class="slidesshow__slide">
-													<img id="c6" src="images/peru-photos/DSC_1476.jpg" class="slidesshow__slide">
-													<img id="c7" src="images/peru-photos/DSC_1591 copy.jpg" class="slidesshow__slide">
-													<img id="c8" src="images/peru-photos/DSC_1609 copy.jpg" class="slidesshow__slide">
-												</div>
 
-											</div>
+										<div id="gallery"></div>
 
-										</div>
+										<script src="main.js"></script>
+										<script>
+											const peruImages = [
+												"images/peru-photos/DSC_1477.jpg",
+												"images/peru-photos/DSC_1440.jpg",
+												"images/peru-photos/DSC_1429.jpg",
+												"images/peru-photos/DSC_1430.jpg",
+												"images/peru-photos/DSC_1431.jpg",
+												"images/peru-photos/DSC_1476.jpg",
+												"images/peru-photos/DSC_1591 copy.jpg",
+												"images/peru-photos/DSC_1609 copy.jpg"
+											];
+
+											document.addEventListener("DOMContentLoaded", () => {
+												createSlideshow(peruImages, "#gallery");
+											});
+										</script>
+
 									</div>
 								 </section>
 						</div>
