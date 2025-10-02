@@ -71,13 +71,11 @@
 
 	// Sidebar.
 		fetch("/sidebar")
-							.then(response => response.text())
-							.then(data => {
-							// Insert into target element
-							document.getElementById("sidebar_standin").innerHTML = data;
-							})
-							.catch(error => console.error("Error loading HTML:", error));
-		var $sidebar = $('#sidebar'),
+			.then(response => response.text())
+			.then(data => {
+			// Insert into target element
+			document.getElementById("sidebar_standin").innerHTML = data;
+			var $sidebar = $('#sidebar'),
 			$sidebar_inner = $sidebar.children('.inner');
 
 		// Inactive by default on <= large.
@@ -169,6 +167,9 @@
 						$sidebar.addClass('inactive');
 
 				});
+			})
+			.catch(error => console.error("Error loading HTML:", error));
+		
 
 		// Scroll lock.
 		// Note: If you do anything to change the height of the sidebar's content, be sure to
