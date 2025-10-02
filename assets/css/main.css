@@ -2324,7 +2324,7 @@ margin: 0;
     max-width: 90vw;    /* never wider than 90% of viewport */
     width: auto !important;   /* force natural width */
     height: auto !important;  /* force natural height */
-    margin: 0 auto;           /* center horizontally */
+    margin: 5vh auto;           /* center horizontally */
     object-fit: contain;      /* makes sure it scales down inside the box */
 	}
 
