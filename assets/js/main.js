@@ -167,11 +167,7 @@
 						$sidebar.addClass('inactive');
 
 				});
-			})
-			.catch(error => console.error("Error loading HTML:", error));
-		
-
-		// Scroll lock.
+				// Scroll lock.
 		// Note: If you do anything to change the height of the sidebar's content, be sure to
 		// trigger 'resize.sidebar-lock' on $window so stuff doesn't get out of sync.
 
@@ -241,8 +237,7 @@
 					.trigger('resize.sidebar-lock');
 
 				});
-
-	// Menu.
+			// Menu.
 		var $menu = $('#menu'),
 			$menu_openers = $menu.children('ul').find('.opener');
 
@@ -266,5 +261,13 @@
 				});
 
 			});
+			
+			})
+			.catch(error => console.error("Error loading HTML:", error));
+		
+
+		
+
+	
 
 })(jQuery);
