@@ -2319,13 +2319,14 @@ margin: 0;
 	}
 
 	&__slide {
-		display: block;
-    max-height: 80vh;   /* never taller than 80% of viewport */
-    max-width: 90vw;    /* never wider than 90% of viewport */
-    width: auto !important;   /* force natural width */
-    height: auto !important;  /* force natural height */
-    margin: 5vh auto;           /* center horizontally */
-    object-fit: contain;      /* makes sure it scales down inside the box */
+      display: block;
+      max-width: 90vw;    /* never wider than 90% of viewport */
+      max-height: 80vh;   /* never taller than 80% of viewport */
+      width: auto;
+      height: auto;
+
+      margin: 5vh auto;   /* transparent margin, scales with screen size */
+      object-fit: contain;
 	}
 
 	&__dot {
@@ -2358,16 +2359,5 @@ margin: 0;
 
 img {
 	max-width: 100%;
-}
-
-.slidesshow__slide {
-  display: block;
-  max-width: 90vw;    /* never wider than 90% of viewport */
-  max-height: 80vh;   /* never taller than 80% of viewport */
-  width: auto;
-  height: auto;
-
-  margin: 5vh auto;   /* transparent margin, scales with screen size */
-  object-fit: contain;
 }
 
