@@ -1,29 +1,22 @@
 /**
  * Create a slideshow section.
  * @param {string[]} images - Array of image paths.
- * @param {string[]} [captions=[]] - Array of captions (same length as images). Optional.
  * @param {string} targetSelector - Where to insert the slideshow.
  */
-function createSlideshow(images, captions = [], targetSelector) {
+function createSlideshow(images, targetSelector) {
   const target = document.querySelector(targetSelector);
   if (!target) return;
-
-  // Normalize captions array so it's always same length as images
-  captions = images.map((_, i) => captions[i] || "");
 
   // Build aside thumbnails
   let asideHTML = images.map((src, i) => `
     <a href="#c${i+1}" class="slidesshow__dot">
-      <img src="${src}" class="slidesshow__thumbnail" alt="${captions[i]}">
+      <img src="${src}" class="slidesshow__thumbnail">
     </a>
   `).join("");
 
-  // Build main slides with captions under images
+  // Build main slides
   let slidesHTML = images.map((src, i) => `
-    <figure id="c${i+1}" class="slidesshow__slide">
-      <img src="${src}" alt="${captions[i]}">
-      ${captions[i] ? `<figcaption class="slidesshow__caption">${captions[i]}</figcaption>` : ""}
-    </figure>
+    <img id="c${i+1}" src="${src}" class="slidesshow__slide">
   `).join("");
 
   // Full markup

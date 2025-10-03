@@ -2367,13 +2367,7 @@ img {
   width: auto;
   height: auto;
 
-  margin: 25vh auto;   /* transparent margin, scales with screen size */
+  margin: 5vh auto;   /* transparent margin, scales with screen size */
   object-fit: contain;
 }
 
-.slidesshow__caption {
-  margin-top: 0.5rem;
-  font-size: 0.9rem;
-  color: #848080; /* tweak to fit your theme */
-  text-align: center;
-}
