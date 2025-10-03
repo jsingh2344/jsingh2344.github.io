@@ -2367,7 +2367,7 @@ img {
   width: auto;
   height: auto;
 
-  margin: 5vh auto;   /* transparent margin, scales with screen size */
+  margin: 25vh auto;   /* transparent margin, scales with screen size */
   object-fit: contain;
 }
 
