@@ -2362,7 +2362,7 @@ img {
 
 .slidesshow__slide {
   display: block;
-  max-width: 90vw;    /* never wider than 90% of viewport */
+
   max-height: 80vh;   /* never taller than 80% of viewport */
   width: auto;
   height: auto;
@@ -2370,4 +2370,5 @@ img {
   margin: 5vh auto;   /* transparent margin, scales with screen size */
   object-fit: contain;
 }
+
 
