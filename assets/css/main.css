@@ -2371,3 +2371,9 @@ img {
   object-fit: contain;
 }
 
+.slidesshow__caption {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #848080; /* tweak to fit your theme */
+  text-align: center;
+}
