@@ -17,6 +17,11 @@
 		<!-- Mobile / Apple devices -->
 		<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
 
+		<!-- language syntax support -->
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css" rel="stylesheet" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"></script>
+
+
 	</head>
 	<body class="is-preload">
 
@@ -45,8 +50,10 @@
 									<p> <a href="https://github.com/jsingh2344/2020-17v22/blob/main/17v22.R">
 										(Link to full script)
 									</a></p>
-									<p>
+									<div class="article">
+										<p>
 										<pre>
+										<code class="language-r">
 #load 2019-2021 data (Tannehill's tenure in Tennessee)
 {
 rt_pbp <- load_pbp(2019:2021)
@@ -56,8 +63,10 @@ filter(posteam == 'TEN') %>%
 filter(rush == 1 | pass == 1) %>%
 filter(!is.na(epa)) 
 }
+										</code>
 										</pre>
 									</p>
+									</div>
 								</section>
 
 						</div>
