@@ -47,15 +47,15 @@
 									</a></p>
 									<p>
 										<pre>
-											#load 2019-2021 data (Tannehill's tenure in Tennessee)
-											{
-											rt_pbp <- load_pbp(2019:2021)
+#load 2019-2021 data (Tannehill's tenure in Tennessee)
+{
+rt_pbp <- load_pbp(2019:2021)
 
-											titans_pbp <- rt_pbp %>%
-											filter(posteam == 'TEN') %>%
-											filter(rush == 1 | pass == 1) %>%
-											filter(!is.na(epa)) 
-											}
+titans_pbp <- rt_pbp %>%
+filter(posteam == 'TEN') %>%
+filter(rush == 1 | pass == 1) %>%
+filter(!is.na(epa)) 
+}
 										</pre>
 									</p>
 								</section>
