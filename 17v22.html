@@ -18,8 +18,8 @@
 		<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
 
 		<!-- language syntax support -->
-		<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css" rel="stylesheet" />
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"></script>
+		<link href="assets/css/prism.css" rel="stylesheet" />
+		<script src="assets/js/prism.js"></script>
 
 
 	</head>
@@ -51,6 +51,18 @@
 										(Link to full script)
 									</a></p>
 									<div class="article">
+										<p>After overhearing on the radio the Tennessee Titans losing to the Chiefs in the 2020 AFC championship game,
+											for some reason I decided to make the Titans a primary interest of my life 
+											over the next couple years. The Titans in those years were offensively driven, and largely
+											relied on a strong rushing attack led by Derrick Henry. But their on-field success correlated
+											more with the arrival of veteran quarterback Ryan Tannehill, who particularly in 2019 and 2020 
+											led passing offenses that ranked amongst the most efficient in the league.
+										</p>
+										<p>Derrick Henry, a Hall of Fame back with one of the best highlight reels in the league,
+											was the more popular player of the two. As an annoying contrarian with preference for looking at some of the 
+											more abstract football statistics, I thought Tannehill was probably more valuable. This was 
+											a small project I put together to flesh out this comparison.
+										</p>
 										<p>
 										<pre>
 										<code class="language-r">
@@ -66,6 +78,104 @@ filter(!is.na(epa))
 										</code>
 										</pre>
 									</p>
+									<p>I first looked at Tennessee Titans offensive data from 2019 to 2021, using the 
+										NFLFastR library, and then compared on 1st and 2nd down how much the Titans estimated 
+										win percentage changed based on whether it was a pass from Tannehill or a rush from Henry.
+									</p>
+									<pre> <code class="language-r">
+down_wpa_epa <- titans_pbp %>% 
+  filter(passer == "R.Tannehill" | rusher == "D.Henry", down < 3) %>%
+  group_by(down, name) %>%
+  summarize(
+    mean_epa = mean(epa), plays = n(), wpa_per30 = mean(wpa) * 30
+  )
+
+down_split_wpa_bar <- ggplot(down_wpa_epa, aes(fill=name, x=down, y=wpa_per30)) +
+  geom_bar(position='dodge', stat='identity') +
+  geom_text(aes(label = down), position = position_dodge(0.9))
+
+down_split_wpa_bar <- down_split_wpa_bar + theme(
+  axis.text.x = element_blank())
+down_split_wpa_bar <- down_split_wpa_bar +
+  labs(title = "Win % Added per 30 Plays: Ryan Tannehill and Derrick Henry",
+       subtitle = "Win percentage between 10 and 90%, down < 3",
+       caption = "Data from NFLFastR")
+down_split_wpa_bar
+									</code>
+									</pre>
+
+									<img src="images/17v22 Album/wpaPer30.png" class="content-image">
+									<p>Plotting the result gives, in context, a very normal result -- considered independently,
+										passing is 
+										more efficient than running in most cases. The EPA (expected points added)
+										splits are similar:
+									</p>
+									<pre>
+										<code class="language-r">
+down_split_epa_bar <- ggplot(down_wpa_epa, aes(fill=name, x=down, y=mean_epa)) +
+  geom_bar(position='dodge', stat='identity') +
+  geom_text(aes(label = down), position = position_dodge(0.9))
+
+down_split_epa_bar <- down_split_epa_bar + theme(
+  axis.text.x = element_blank()) +
+  labs(title = "EPA Splits: Tannehill passes, Henry runs",
+       subtitle = "down < 3, 10 < wpa < 90",
+       caption = "NFLFastR")
+down_split_epa_bar
+										</code>
+									</pre>
+									<img src="images/17v22 Album/epaSplits.png" class="content-image">
+									<p>But how do Tannehill and Henry compare to their peers around the league? 
+										Who is outperforming their own competition? Here is a very basic look at 
+										how Henry stacked up to other rushers from 2018 to 2021:
+									</p>
+									<pre>
+										<code class="language-r">
+rb <- load_pbp(2018:2021) %>%
+	filter(play_type == 'run') %>%
+	filter(!is.na(rusher_player_name)) %>%
+	group_by(rusher_player_name) %>%
+	summarize(
+	epa = mean(epa), carries = n()
+	) %>%
+	filter(carries > 100) %>%
+	arrange(-carries)
+rushing_effectiveness <- ggplot(rb, aes(x=carries, y=epa, fill = epa)) +
+      geom_point(aes(color = epa)) +
+      geom_text(aes(label=rusher_player_name),hjust=0, vjust=0)
+    rushing_effectiveness
+										</code>
+									</pre>
+									<img src="images/17v22 Album/2018-2021_rushing.png" class="content-image">
+									And Tannehill:
+									<pre>
+										<code class="language-r">
+wp_tannehill <- load_pbp(2019:2021) %>%
+      filter(play_type == 'pass') %>% 
+      group_by(passer_player_name) %>%
+      summarize(
+        mean_wpa = mean(wpa) * 30, plays = n(), team=posteam, epa=epa) %>%
+      arrange(-mean_wpa) %>%
+      ungroup() %>%
+      filter(plays > 450) 
+    
+    head(teams_colors_logos)
+    
+    wp_tannehill <- wp_tannehill %>%
+      left_join(teams_colors_logos, by = c('team' = 'team_abbr'))
+qb_wp <- wp_tannehill %>%
+    ggplot(aes(x = mean_wpa, y = fct_reorder(passer_player_name, mean_wpa))) + 
+    #geom_image(aes(image = team_logo_espn), size = wp$plays / 450, asp = 16 / 9)
+    geom_point(color = wp_tannehill$team_color, size = wp_tannehill$plays / 450) + 
+    labs(x = "WPA per 30 plays",
+         y = "QBs",
+         title = "Quarterback WPA, 2019-2021",
+         caption = "Data: @nflfastR") +
+    theme_bw()
+  qb_wp
+										</code>
+									</pre>
+									<img src="images/17v22 Album/qb_wpa_2019-2021.png" class="content-image">
 									</div>
 								</section>
 
