@@ -127,7 +127,8 @@ down_split_epa_bar
 									<img src="images/17v22 Album/epaSplits.png" class="content-image">
 									<p>But how do Tannehill and Henry compare to their peers around the league? 
 										Who is outperforming their own competition? Here is a very basic look at 
-										how Henry stacked up to other rushers from 2018 to 2021:
+										how Henry stacked up to other rushers from 2018 to 2021 (Henry became the starter
+										in 2018):
 									</p>
 									<pre>
 										<code class="language-r">
@@ -147,7 +148,7 @@ rushing_effectiveness <- ggplot(rb, aes(x=carries, y=epa, fill = epa)) +
 										</code>
 									</pre>
 									<img src="images/17v22 Album/2018-2021_rushing.png" class="content-image">
-									And Tannehill:
+									And Tannehill (choosing 2019 as the lower time bound, since that is when Tannehill joined the Titans):
 									<pre>
 										<code class="language-r">
 wp_tannehill <- load_pbp(2019:2021) %>%
@@ -176,6 +177,304 @@ qb_wp <- wp_tannehill %>%
 										</code>
 									</pre>
 									<img src="images/17v22 Album/qb_wpa_2019-2021.png" class="content-image">
+									<p>Looking at these two plots, Henry is the clear outlier, while Tannehill
+										looks more like a good-but-not great player at his position. Still, the success 
+										of each rush attempt depends on the threat who is under center, and vice versa.
+										So I next took a look on the relationship between a good running attack and a good passing attack.
+									 </p>
+									 <pre>
+										<code class="language-r">
+{
+  home_correlation <- titans_pbp %>%
+    filter(passer == "R.Tannehill" | rusher == "D.Henry", down < 4) %>%
+    filter(play_type == 'run' | play_type == 'pass', home_team == 'TEN') %>%
+    group_by(game_id) %>%
+    summarize(
+      rush_epa = last(total_home_rush_epa),
+      pass_epa = last(total_home_pass_epa)
+    ) 
+
+
+#when TEN is away
+away_correlation <- titans_pbp %>%
+  filter(passer == "R.Tannehill" | rusher == "D.Henry", down < 4) %>%
+  filter(play_type == 'run' | play_type == 'pass', home_team != 'TEN') %>%
+  group_by(game_id) %>%
+  summarize(
+    rush_epa = last(total_away_rush_epa),
+    pass_epa = last(total_away_pass_epa)
+  ) 
+
+
+
+} 
+#nope_home plot:
+{
+home_correlation_dotplot <- ggplot(home_correlation, aes(x=rush_epa, y=pass_epa))  +
+  geom_point(aes(color='000000')) +
+  geom_smooth(se = FALSE, color = "black", method = "lm") +
+  labs(title = "Titans Home Offensive Passing EVA vs Rushing EPA",
+       caption = "data from NFLFasR")
+home_correlation_dotplot
+}
+#nope_away plot:
+{
+away_correlation_dotplot <- ggplot(away_correlation, aes(x=rush_epa, y=pass_epa))  +
+  geom_point(aes(color='000000')) +
+  geom_smooth(se = FALSE, color = "black", method = "lm") +
+  labs(title = "Titans Away Offensive Passing EVA vs Rushing EPA",
+        caption = "data from NFLFasR")
+away_correlation_dotplot
+}
+										</code>
+									 </pre>
+									 <img src="images/17v22 Album/nope-home.png" class="content-image">
+									 <img src="images/17v22 Album/nope-away.png" class="content-image">
+									 <p>
+										A very rudimentary look at this question shows that when the Titans have more rushing EPA,
+										it isn't a strong predictor of their passing EPA. But these are EPA totals, and when the Titans
+										run the ball more, they can't also pass more at the same time. 
+									 </p>
+									 <pre>
+										<code class="language-r">
+attempt_correlation <- titans_pbp %>%
+  filter(passer == "R.Tannehill" | rusher == "D.Henry", down < 4) %>%
+  filter(play_type == 'run' | play_type == 'pass') %>%
+  group_by(game_id) %>%
+  summarize(
+    rush_attempts = last(sum(rush_attempt)),
+    pass_success_epa = last(sum(epa))
+  ) 
+attempt_correlation_dotplot <- attempt_correlation %>%
+  ggplot(aes(x=rush_attempts, y=pass_success_epa)) +
+  geom_point(aes(color='00ff00')) +
+  geom_smooth(se = FALSE, color = "black", method = "lm") +
+  labs(title = "Do rushing attempts correlate with passing success?",
+       subtitle = "Titans Offense, 2019-2021",
+       caption = "Data from NFLFastR")
+attempt_correlation_dotplot
+										</code>
+									 </pre>
+									 <img src="images/17v22 Album/rush-pass-corr.png" class="content-image">
+									 <p>
+										Another approach shows that more rushing attempts did correlate with higher passing success.
+										However, that can be explained away by winning teams tending to run it more late in the game to 
+										burn the clock, and when the passing game is successful, it is likely that you are winning. 
+									 </p>
+									 <pre>
+										<code class="language-r">
+wpadjusted_pbp <- titans_pbp %>%
+  filter(vegas_wp < 80) %>%
+  filter(score_differential < 9)
+
+attempt_correlation_adjusted <- wpadjusted_pbp %>%
+  filter(passer == "R.Tannehill" | rusher == "D.Henry", down < 4) %>%
+  filter(play_type == 'run' | play_type == 'pass') %>%
+  group_by(game_id) %>%
+  summarize(
+    rush_attempts = last(sum(rush_attempt)),
+    pass_success_epa = last(sum(epa)),
+  ) 
+attempt_correlation_graph <-
+  ggplot(attempt_correlation_adjusted, aes(x=rush_attempts, y=pass_success_epa)) +
+  geom_point(aes(color='00ff00')) +
+  geom_smooth(se = FALSE, color = "black", method = "lm") +
+  labs(title ="Does passing success correlate with rushing attempts outside of garbage time?",
+       subtitle = "Vegas WP under 80%",
+       caption = "data from NFLFastR")
+attempt_correlation_graph
+										</code>
+									 </pre>
+									 <img src="images/17v22 Album/rush-pass-corr-no-garb.png" class="content-image">
+									 <p>
+										...And when you cut out garbage time, when a lot of 
+										the clock-burning rush attempts are made, the correlation is less dramatic.
+									 </p>
+									 <pre>
+										<code class="language-r">
+#Explore correlation between play action and rushing success for the season of 2020
+{
+playaction <- scrapR %>%
+  filter(season == 2020) %>%
+  summarize (
+    plays = pass_attempts, yards_per_pa = pa_pass_yards / pa_pass_att, player = player, team = team
+  ) %>%
+  filter(plays > 70)
+
+runavg_2020 <- load_pbp(2020) %>%
+  filter(play_type == 'run') %>%
+  group_by(posteam) %>%
+  summarize(
+    avg = mean(yards_gained)
+  )
+
+names(runavg_2020)[names(runavg_2020) == 'posteam'] <- 'team'
+
+PAvRun <- merge(runavg_2020, playaction, by='team')
+
+PAvRun$Col <- rbPal(10)[as.numeric(cut(PAvRun$yards_per_pa, breaks = 10))]
+
+PAvRun_dotplot <- PAvRun %>% 
+  ggplot(aes(x=avg, y=yards_per_pa)) +
+  geom_point(size = PAvRun$plays / 250, color = PAvRun$Col) +
+  geom_smooth(se = FALSE, color = "black", method = "lm") +
+  labs(title = "2020 PA versus Rushing Efficiency",
+       caption = "Data from PFR and NFLFastR")
+PAvRun_dotplot
+
+}
+										</code>
+									 </pre>
+									 <img src="images/17v22 Album/PAvRush.png" class="content-image">
+									 <p>
+										A look at the entire league shows that in general, there is an association between
+										play action and rushing efficiency.
+									 </p>
+									 <p>Next, I examined how Tannehill performed with and without the threat of a Henry rush attempt.
+										First, his performance out of the shotgun formation, now using Sportradar charting data:
+									 </p>
+									 <pre>
+										<code class="language=r">
+SR_2021_pbp <- readRDS("/Users/jsingh23/Desktop/R/Sportradar/Data/pbp_2020.rds")
+  SR_2021_part <- readRDS("/Users/jsingh23/Desktop/R/Sportradar/Data/participation_2020.rds")
+  fastr20 <- load_pbp(2020) 
+  SR_2021_pbp$game_id <- str_replace_all(SR_2021_pbp$game_id, "JAC", "JAX")
+  merged_SR <- merge(SR_2021_pbp, SR_2021_part, by="sr_id")
+  merged_SR <- merged_SR %>%
+    mutate(play_id = play_id.x)
+  SR_fastr <- merge(merged_SR, 
+              load_pbp(2020), 
+              by=c("play_id", 
+              "game_id"))
+  SR_fastr %>% saveRDS("/Users/jsingh23/Desktop/R/SR_fastr")
+  SR_fastr <- readRDS("/Users/jsingh23/Desktop/R/SR_fastr")
+
+league_shotgun <- SR_fastr %>%
+    filter(shotgun == 1) %>%
+    filter(!is.na(passer_player_name)) %>%
+    group_by(passer_player_name) %>%
+    summarize(
+     epa = mean(epa), plays = n(), box = mean(men_in_box)
+    ) %>%
+    filter(plays > 70) %>%
+    arrange(-epa) 
+
+shotgun_graph <- league_shotgun %>%
+    filter(plays > 200) %>%
+    arrange(-epa) %>%
+    filter(!is.na(box)) %>%
+    mutate(across(starts_with("box"), round, 1)) %>%
+    ggplot(aes(x=reorder(passer_player_name, -epa), y=epa)) + 
+    geom_point(size = 3, aes(color = factor(epa))) + 
+    geom_segment(aes(x=passer_player_name, 
+                     xend=passer_player_name, 
+                     y=0, 
+                     yend=epa)) +
+    theme(axis.text.x = element_text(angle=65, vjust=0.6)) +
+    theme(legend.position = "none") +
+    geom_text(aes(label = box), position = position_nudge(y = 0.03), alpha = 1, color = "skyblue") +
+    labs(title = "2020 Selected Quarterbacks EPA/Play Out of Shotgun", subtitle = "Labels represent average number of men in box",
+         y = "EPA/Play", x = "Passer", caption = "Data from Sportradar and NFLFastR")
+    shotgun_graph
+										</code>
+									 </pre>
+									 <img src="images/17v22 Album/shotgun.png" class="content-image">
+									 <p>
+										Surprisingly, Tannehill was one of the most effective quarterbacks in the league out of shotgun,
+										and without an outlier number of defenders in the box. Next, how the offense performed split by
+										whether Derrick Henry was on or off the field at all:
+									 </p>
+									 <pre>
+										<code class="language-r">
+ DH_On <- SR_fastr %>%
+   filter(posteam == "TEN") %>%
+   filter(grepl("Derrick Henry", home_names, fixed=TRUE) | 
+            grepl("Derrick Henry", away_names, fixed=TRUE)) %>%
+   mutate(DH = 1)
+ DH_Off <- SR_fastr %>%
+   filter(posteam == "TEN") %>%
+   filter(play_type == "run" | play_type == "pass") %>%
+   filter(!grepl("Derrick Henry", home_names, fixed=TRUE) & 
+            !grepl("Derrick Henry", away_names, fixed=TRUE)) %>%
+   mutate(DH = 0)
+ participation_22 <- rbind(DH_Off, DH_On)
+
+  DH_splits_density <- participation_22 %>% ggplot(aes(x=epa, group=DH, fill = DH)) +
+          geom_density(adjust=1.5, alpha=.4) +
+   theme_few() +
+   theme(legend.position = "none") +
+   labs(title = "The Titans 2020 Offense - Derrick Henry Splits",
+        subtitle = "Plays with Henry on the field are represented by blue; without, by grey. 
+Early downs, win percentage between 5 and 95 percent. Two minute drills are excluded",
+        caption = "Data from Sportradar and NFLFastR") +
+   theme(plot.subtitle=element_text(size=10))
+    DH_splits_density
+										</code>
+									 </pre>
+									 <img src="images/17v22 Album/image4.png" class="content-image">
+									 <pre>
+										<code class="language-r">
+DH_passing <- participation_22 %>%
+     filter(down == 1 | down == 2) %>%
+     filter(play_type == "pass") %>%
+     filter(half_seconds_remaining > 120) %>%
+     filter(posteam == "TEN") %>%
+     filter(wp > 5 | wp < 95) %>%
+     group_by(DH) %>%
+     summarize(
+       passing_epa = mean(epa), passing_plays = n(), passing_success = mean(success)
+     )
+   DH_rushing <- participation_22 %>%
+     filter(down == 1 | down == 2) %>%
+     filter(play_type == "run") %>%
+     filter(half_seconds_remaining > 120) %>%
+     filter(posteam == "TEN") %>%
+     filter(wp > 5 | wp < 95) %>%
+     group_by(DH) %>%
+     summarize(
+       rushing_epa = mean(epa), rushing_plays = n(), rushing_success = mean(success)
+     )
+    
+ DH_overall <- merge(DH_rushing, DH_passing, by="DH") 
+
+DH_overall <- merge(DH_rushing, DH_passing, by="DH") 
+ 
+ 
+ #Fit data for a bar graph:
+ 
+ DH_overall <- as.data.frame(t(as.matrix(DH_overall)))
+ DH_overall <- DH_overall %>%
+   mutate(On = V2) %>%
+   mutate(Off = V1)
+ DH_overall$V1 <- NULL
+ DH_overall$V2 <- NULL
+ 
+ 
+ 
+ DH_overall <- rownames_to_column(DH_overall, var = "rowname")
+ DH_barcomp <- pivot_longer(DH_overall, -rowname, names_to="variable", values_to="value")
+ DH_barcomp <- DH_barcomp[-c(5, 6, 11, 12), ]
+ DH_barcomp <- DH_barcomp[-c(1, 2), ]
+   }#Getting summarized early down epa and success splits
+ 
+ DH_splits_bar <- ggplot(DH_barcomp,aes(x = rowname,y = value)) + 
+   geom_bar(aes(fill = variable),stat = "identity",position = "dodge") +
+   labs(title = "2020 Titans Offense Derrick Henry On/Off Splits", subtitle = "Early downs, win percentage between 5 and 95 percent, two minute drills excluded",
+        y = "Value", x = "Variable", caption = "Data from Sportradar and NFLFastR")
+
+ DH_splits_bar
+										</code>
+									 </pre>
+									 <img src="images/17v22 Album/on-off.png" class="content-image">
+									 <p>
+										The final analysis was a down-by-down look at how the offense performed with Henry on and off the field.
+										The results did not indicate a large impact, but again with a lot of contextual holes.
+										Fundamentally, plays with Henry on the field and with Henry off the field are not otherwise equal.
+										Football has a massive number of external factors that would matter here. For example, Henry would likely 
+										be off the field in two-minute drill situations where the defense might be willing to give
+										up large plays that keep the clock running.
+	
+									 </p>
 									</div>
 								</section>
 
