@@ -2001,7 +2001,7 @@ button,
     margin-left: -26em; }
   @media screen and (max-width: 1680px) {
     #sidebar {
-      position: fixed;
+      position: fixed !important;
       width: 24em; }
       #sidebar > .inner {
         padding: 1.66667em 1.66667em 1.33333em 1.66667em ;
