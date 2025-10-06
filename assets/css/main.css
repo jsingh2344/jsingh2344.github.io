@@ -2376,3 +2376,7 @@ pre {
   background-color: #4b4242;
   font-family: 'Courier New', Courier, monospace;
 }
+
+.sidebar {
+  z-index: 9999 !important;
+}
