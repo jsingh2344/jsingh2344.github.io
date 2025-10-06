@@ -180,8 +180,8 @@ qb_wp <- wp_tannehill %>%
 									<img src="images/17v22 Album/qb_wpa_2019-2021.png" class="content-image">
 									<p>Looking at these two plots, Henry is the clear outlier, while Tannehill
 										looks more like a good-but-not great player at his position. Still, the success 
-										of each rush attempt depends on the threat who is under center, and vice versa.
-										So I next took a look on the relationship between a good running attack and a good passing attack.
+										of each rush attempt depends on the threat of who is under center, and vice versa.
+										So I next took a look at the relationship between a good running attack and a good passing attack.
 									 </p>
 									 <pre>
 										<code class="language-r">
@@ -328,11 +328,18 @@ PAvRun_dotplot
 									 </pre>
 									 <img src="images/17v22 Album/PAvRush.png" class="content-image">
 									 <p>
-										A look at the entire league shows that in general, there is an association between
-										play action and rushing efficiency.
+										Finally, a look at the entire league shows that in general, there is an association between
+										specifically play action and rushing efficiency. Parsing the signal and noise remains difficult,
+										because a having a good quarterback alone could be responsible for being strong in both of these categories.
+										And, potentially, the same logic could apply to running backs. But it's good to at least confirm
+										there is a positive relationship, if not necessarily causation.
 									 </p>
-									 <p>Next, I examined how Tannehill performed with and without the threat of a Henry rush attempt.
-										First, his performance out of the shotgun formation, now using Sportradar charting data:
+									 <p>Next, I examined how Tannehill performed with or without the threat of a Henry rush attempt.
+										First, I looked at his performance out of the shotgun formation, now using Sportradar charting data.
+										The typical knock on play-action-heavy passers like Tannehill is that while they may be very successful
+										in structured run-fake scenarios, in more obvious passing scenarios (like lining up in shotgun) 
+										the same quarterbacks start to struggle. Here is the data from 2020, Tannehill's most efficient 
+										full season:
 									 </p>
 									 <pre>
 										<code class="language-r">
@@ -381,7 +388,7 @@ shotgun_graph <- league_shotgun %>%
 									 </pre>
 									 <img src="images/17v22 Album/shotgun.png" class="content-image">
 									 <p>
-										Surprisingly, Tannehill was one of the most effective quarterbacks in the league out of shotgun,
+										So Tannehill was one of the most effective quarterbacks in the league out of shotgun,
 										and without an outlier number of defenders in the box. Next, how the offense performed split by
 										whether Derrick Henry was on or off the field at all:
 									 </p>
@@ -468,13 +475,21 @@ DH_overall <- merge(DH_rushing, DH_passing, by="DH")
 									 </pre>
 									 <img src="images/17v22 Album/on-off.png" class="content-image">
 									 <p>
-										The final analysis was a down-by-down look at how the offense performed with Henry on and off the field.
+										The last plot is a down-by-down look at how the offense performed with Henry on and off the field.
 										The results did not indicate a large impact, but again with a lot of contextual holes.
 										Fundamentally, plays with Henry on the field and with Henry off the field are not otherwise equal.
-										Football has a massive number of external factors that would matter here. For example, Henry would likely 
+										A number of uncontrolled external factors could matter here. For example, Henry would likely 
 										be off the field in two-minute drill situations where the defense might be willing to give
 										up large plays that keep the clock running.
-	
+									 </p>
+									 <p>
+										However, I think for some fans this last plot might be surprising. In particular, 
+										if you think Henry was a viable Most Valuable Player candidate in 2020, the season he rushed
+										for over 2000 yards, you might expect a larger gap in his on/off splits. 
+										So one conclusion, supported by lots of modern analytical theory, is simply that Henry 
+										didn't deserve to be in that conversation. Not because he wasn't one of the best players in the league. 
+										Because running backs struggle to show the kind of impact footprint that you want from 
+										the 'most valuable' players in the league. 
 									 </p>
 									</div>
 								</section>
