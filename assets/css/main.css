@@ -2004,6 +2004,7 @@ button,
       position: fixed !important;
       width: 24em; }
       #sidebar > .inner {
+        position: relative;
         padding: 1.66667em 1.66667em 1.33333em 1.66667em ;
         width: 24em; }
         #sidebar > .inner > .alt {
