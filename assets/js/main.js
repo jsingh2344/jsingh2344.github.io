@@ -171,72 +171,72 @@
 		// Note: If you do anything to change the height of the sidebar's content, be sure to
 		// trigger 'resize.sidebar-lock' on $window so stuff doesn't get out of sync.
 
-			// $window.on('load.sidebar-lock', function() {
+			$window.on('load.sidebar-lock', function() {
 
-			// 	var sh, wh, st;
+				var sh, wh, st;
 
-			// 	// Reset scroll position to 0 if it's 1.
-			// 		if ($window.scrollTop() == 1)
-			// 			$window.scrollTop(0);
+				// Reset scroll position to 0 if it's 1.
+					if ($window.scrollTop() == 1)
+						$window.scrollTop(0);
 
-			// 	$window
-			// 		.on('scroll.sidebar-lock', function() {
+				$window
+					.on('scroll.sidebar-lock', function() {
 
-			// 			var x, y;
+						var x, y;
 
-			// 			// <=large? Bail.
-			// 				if (breakpoints.active('<=large')) {
+						// <=large? Bail.
+							if (breakpoints.active('<=large')) {
 
-			// 					$sidebar_inner
-			// 						.data('locked', 0)
-			// 						.css('position', '')
-			// 						.css('top', '');
+								$sidebar_inner
+									.data('locked', 0)
+									.css('position', '')
+									.css('top', '');
 
-			// 					return;
+								return;
 
-			// 				}
+							}
 
-			// 			// Calculate positions.
-			// 				x = Math.max(sh - wh, 0);
-			// 				y = Math.max(0, $window.scrollTop() - x);
+						// Calculate positions.
+							x = Math.max(sh - wh, 0);
+							y = Math.max(0, $window.scrollTop() - x);
 
-			// 			// Lock/unlock.
-			// 				if ($sidebar_inner.data('locked') == 1) {
+						// Lock/unlock.
+							if ($sidebar_inner.data('locked') == 1) {
 
-			// 					if (y <= 0)
-			// 						$sidebar_inner
-			// 							.data('locked', 0)
-			// 							.css('position', '')
-			// 							.css('top', '');
-			// 					else
-			// 						$sidebar_inner
-			// 							.css('top', -1 * x);
+								if (y <= 0)
+									$sidebar_inner
+										.data('locked', 0)
+										.css('position', '')
+										.css('top', '');
+								else
+									$sidebar_inner
+										.css('top', -1 * x);
 
-			// 				}
-			// 				else {
+							}
+							else {
 
-			// 					if (y > 0)
-			// 						$sidebar_inner
-			// 							.data('locked', 1)
-			// 							.css('position', 'fixed')
-			// 							.css('top', -1 * x);
+								if (y > 0)
+									$sidebar_inner
+										.data('locked', 1)
+										.css('position', 'fixed')
+										.css('top', -1 * x);
 
-			// 				}
+							}
 
-			// 		})
-			// 		.on('resize.sidebar-lock', function() {
+					})
+					.on('resize.sidebar-lock', function() {
 
-			// 			// Calculate heights.
-			// 				wh = $window.height();
-			// 				sh = $sidebar_inner.outerHeight() + 30;
+						// Calculate heights.
+							wh = $window.height();
+							sh = $sidebar_inner.outerHeight() + 30;
 
-			// 			// Trigger scroll.
-			// 				$window.trigger('scroll.sidebar-lock');
+						// Trigger scroll.
+							$window.trigger('scroll.sidebar-lock');
 
-			// 		})
-			// 		.trigger('resize.sidebar-lock');
+					})
+					.trigger('resize.sidebar-lock');
 
-			// 	});
+				});
 			// Menu.
 		var $menu = $('#menu'),
 			$menu_openers = $menu.children('ul').find('.opener');
