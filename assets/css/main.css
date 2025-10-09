@@ -2110,9 +2110,7 @@ margin: 0;
 	padding: 0 1rem;
 }
 
-img {
-	max-width: 100%;
-}
+
 
 .slidesshow__slide {
   display: block;
@@ -2124,6 +2122,17 @@ img {
   margin: 5vh auto;   /* transparent margin, scales with screen size */
   object-fit: contain;
   overflow: hidden;
+
+  align-items: center;
+}
+
+.slidesshow__slide img {
+  max-width: 100%;
+  max-height: 80vh;
+  height: auto;
+  width: auto;
+  object-fit: contain;
+  align
 }
 
 
