@@ -2201,6 +2201,10 @@ pre {
   box-shadow: 2px 0 10px rgba(0,0,0,0.3);
 }
 
+#sidebar > .inner {
+    padding: 2.22222em 2.22222em 2.44444em 2.22222em ;
+    width: 26em; }
+
 /* When active, slide into full view */
 #sidebar.active {
   left: 0;
