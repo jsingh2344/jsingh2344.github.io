@@ -1497,7 +1497,7 @@ button,
   border-radius: 0.375em;
   border: 0;
   box-shadow: inset 0 0 0 2px #ffffff;
-  color: #40367a !important;
+  color: #ffffff !important;
   cursor: pointer;
   display: inline-block;
   font-family: "Roboto Slab", serif;
@@ -2218,12 +2218,7 @@ pre {
 }
 
 /* Header and toggle button */
-#header {
-  display: flex;
-  align-items: center;
-  padding: 1rem 1.5rem;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
+
 
 #sidebar-toggle {
   background: none;
