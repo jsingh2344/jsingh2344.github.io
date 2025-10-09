@@ -1969,7 +1969,7 @@ button,
     line-height: 7.5em;
     outline: 0;
     overflow: hidden;
-    position: absolute;
+    position: relative;
     text-align: center;
     text-indent: -15em;
     white-space: nowrap;
@@ -1993,7 +1993,7 @@ button,
       height: inherit;
       left: 0;
       line-height: inherit;
-      position: absolute;
+      position: relative;
       text-indent: 0;
       top: 0;
       width: inherit; }
