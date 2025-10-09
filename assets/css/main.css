@@ -2191,45 +2191,31 @@ pre {
 #sidebar {
   position: fixed;
   top: 0;
-  left: 0;
+  left: -220px;   /* hidden but not all the way off screen */
   width: 260px;
   height: 100vh;
   background: #111;
   background-color: #3f4448;
-  color: #fff;
-  transform: translateX(-100%);
-  transition: transform 0.3s ease;
+  transition: left 0.3s ease;
   z-index: 1000;
-  padding: 2rem 1.5rem;
   box-shadow: 2px 0 10px rgba(0,0,0,0.3);
 }
 
-/* When active, slide in */
+/* When active, slide into full view */
 #sidebar.active {
-  transform: translateX(0);
+  left: 0;
 }
 
-/* Sidebar links */
-#sidebar a {
+/* Toggle button peeks out even when sidebar is closed */
+#sidebar .toggle {
+  position: absolute;
+  top: 1rem;
+  right: -2.5rem;   /* make it stick out */
+  width: 2.5rem;
+  height: 2.5rem;
+  background: #111;
   color: #fff;
-  text-decoration: none;
-  display: block;
-  margin: 1rem 0;
-}
-
-/* Header and toggle button */
-
-
-#sidebar-toggle {
-  background: none;
   border: none;
-  font-size: 1.5rem;
   cursor: pointer;
-  margin-right: 1rem;
-  color:white;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
 }
-
-#sidebar-toggle:hover {
-  color: #0077ff;
-}
-
