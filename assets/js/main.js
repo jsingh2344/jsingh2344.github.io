@@ -77,6 +77,10 @@
 				});
 			}
 
+			var $menu = $('#menu'),
+				$menu_openers = $menu.children('ul').find('.opener');
+
+
 			$menu_openers.each(function() {
 
 				var $this = $(this);
