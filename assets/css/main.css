@@ -2073,6 +2073,13 @@ margin: 0;
     margin: 5vh auto;           /* center horizontally */
     object-fit: contain;      /* makes sure it scales down inside the box */
 	}
+  &__caption {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #666;
+  text-align: center;
+  max-width: 90%;
+}
 
 	&__dot {
 		&:active {
