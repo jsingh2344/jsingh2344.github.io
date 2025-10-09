@@ -2222,7 +2222,7 @@ pre {
   display: flex;
   align-items: center;
   padding: 1rem 1.5rem;
-  background: #f9f9f9;
+  background: #000000;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
