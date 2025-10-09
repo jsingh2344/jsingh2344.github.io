@@ -2202,8 +2202,10 @@ pre {
 }
 
 #sidebar > .inner {
-    padding: 2.22222em 2.22222em 2.44444em 2.22222em ;
-    width: 26em; }
+  padding: 2.22222em 2.22222em 2.44444em 2.22222em ;
+  width: 100%;   /* stays inside */
+  box-sizing: border-box;
+}
 
 /* When active, slide into full view */
 #sidebar.active {
