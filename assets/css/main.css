@@ -2007,7 +2007,7 @@ button,
         position: relative;
 
         overflow-y: auto;
-        /* position: absolute; */
+        position: absolute !important ;
 
         padding: 1.66667em 1.66667em 1.33333em 1.66667em ;
         width: 24em; }
