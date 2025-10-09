@@ -2127,8 +2127,8 @@ pre {
 #sidebar {
   position: fixed;
   top: 0;
-  left: -260px;   /* hidden but not all the way off screen */
-  width: 260px;
+  left: -24em;   /* hidden but not all the way off screen */
+  width: 24em;
   height: 100vh;
   background: #111;
   background-color: #3f4448;
