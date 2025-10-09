@@ -2141,8 +2141,15 @@ pre {
   padding: 2.22222em 2.22222em 2.44444em 2.22222em ;
   width: 100%;   /* stays inside */
   box-sizing: border-box;
+
 }
 
+#sidebar > .inner > * {
+  
+  border-bottom: solid 2px rgba(210, 215, 217, 0.75);
+  margin: 0 0 3.5em 0;
+  padding: 0 0 3.5em 0;
+}
 /* When active, slide into full view */
 #sidebar.active {
   left: 0;
