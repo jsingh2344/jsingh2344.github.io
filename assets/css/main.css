@@ -2135,9 +2135,13 @@ pre {
   transition: left 0.3s ease;
   z-index: 1000;
   box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+
+  display: flex;
+  flex-direction: column;
 }
 
 #sidebar > .inner {
+  flex:1;
   padding: 2.22222em 2.22222em 2.44444em 2.22222em ;
   width: 100%;   /* stays inside */
   box-sizing: border-box;
@@ -2158,6 +2162,7 @@ pre {
 
 /* Toggle button peeks out even when sidebar is closed */
 #sidebar .toggle {
+  flex-shrink: 0;  /* stays at top */
   content: '\f0c9';
   position: absolute;
   font-size: 2em;
