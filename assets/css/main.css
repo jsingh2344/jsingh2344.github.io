@@ -2208,8 +2208,12 @@ pre {
 
 /* Toggle button peeks out even when sidebar is closed */
 #sidebar .toggle {
+  content: '\f0c9';
   position: absolute;
+  line-height: 6.25 em;
+  text-indent: 5 em;
   top: 1rem;
+  left: 24 em;
   right: -2.5rem;   /* make it stick out */
   width: 5 rem;
   height: 6.25rem;
