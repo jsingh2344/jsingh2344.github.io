@@ -1820,7 +1820,7 @@ table {
   display: -webkit-flex;
   display: -ms-flex;
   display: flex;
-  border-bottom: solid 5px #f56a6a;
+  border-bottom: solid 5px #ffffff;
   padding: 6em 0 1em 0;
   position: relative; }
   #header > * {
@@ -2152,7 +2152,6 @@ pre {
 #sidebar .toggle {
   content: '\f0c9';
   position: absolute;
-  line-height: 6.25em;
   font-size: 2em;
   right: -2.5rem;   /* make it stick out */
   height: 6.25rem;
