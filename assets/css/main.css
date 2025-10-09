@@ -2231,6 +2231,7 @@ pre {
   font-size: 1.5rem;
   cursor: pointer;
   margin-right: 1rem;
+  color:white;
 }
 
 #sidebar-toggle:hover {
