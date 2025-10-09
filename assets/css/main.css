@@ -2211,11 +2211,10 @@ pre {
   position: absolute;
   top: 1rem;
   right: -2.5rem;   /* make it stick out */
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 5 rem;
+  height: 6.25rem;
   background: #111;
   color: #fff;
   border: none;
   cursor: pointer;
-  box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
 }
