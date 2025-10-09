@@ -2114,13 +2114,13 @@ pre {
 #sidebar .toggle {
   content: '\f0c9';
   position: absolute;
-  line-height: 6.25 em;
-  text-indent: 5 em;
-  font-size: 3 em;
+  line-height: 6.25em;
+  text-indent: 5em;
+  font-size: 2em;
   top: 1rem;
-  left: 24 em;
+  left: 24em;
   right: -2.5rem;   /* make it stick out */
-  width: 5 rem;
+  width: 5rem;
   height: 6.25rem;
   background: #111;
   color: #fff;
