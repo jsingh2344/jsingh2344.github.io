@@ -2006,7 +2006,7 @@ button,
       #sidebar > .inner {
         position: relative;
 
-        overflow-y: auto;
+        overflow-y: auto !important ;
         position: absolute !important ;
 
         padding: 1.66667em 1.66667em 1.33333em 1.66667em ;
