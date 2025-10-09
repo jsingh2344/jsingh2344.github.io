@@ -2218,6 +2218,7 @@ pre {
   position: absolute;
   line-height: 6.25 em;
   text-indent: 5 em;
+  font-size: 3 em;
   top: 1rem;
   left: 24 em;
   right: -2.5rem;   /* make it stick out */
