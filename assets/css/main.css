@@ -1916,9 +1916,6 @@ button,
   #search form input[type="text"] {
     padding-right: 2.75em; }
 
-#sidebar {
-  background-color: #3f4448;
-  }
 
 /* Banner */
 #banner {
@@ -2187,5 +2184,57 @@ img {
 pre {
   background-color: #4b4242;
   font-family: 'Courier New', Courier, monospace;
+}
+
+
+/* Sidebar base */
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100vh;
+  background: #111;
+  background-color: #3f4448;
+  color: #fff;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 1000;
+  padding: 2rem 1.5rem;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+}
+
+/* When active, slide in */
+#sidebar.active {
+  transform: translateX(0);
+}
+
+/* Sidebar links */
+#sidebar a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  margin: 1rem 0;
+}
+
+/* Header and toggle button */
+#header {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: #f9f9f9;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+#sidebar-toggle {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+#sidebar-toggle:hover {
+  color: #0077ff;
 }
 
