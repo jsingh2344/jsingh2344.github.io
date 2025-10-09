@@ -2028,8 +2028,9 @@ h1, h2, h3, h4, h5, h6 {
 
 
 .content-image {
+      max-height: 80vh;
       max-width: 600px;   /* keeps it from being too wide */
-      width: 100%;        /* scales with smaller screens */
+      width: auto;        /* scales with smaller screens */
       height: auto;       /* keeps aspect ratio */
       display: block;
       margin: 20px auto;  /* center the image with space above/below */
