@@ -2077,7 +2077,7 @@ margin: 0;
   &__caption {
   margin-top: 0.5rem;
   font-size: 0.9rem;
-  color: #666;
+  color: #b29595;
   text-align: center;
   max-width: 90%;
 }
@@ -2116,6 +2116,8 @@ img {
   height: auto;
   width: auto;
   object-fit: contain;
+  display:block;
+  
 
 }
 
@@ -2130,12 +2132,18 @@ img {
   overflow: hidden;
 
   display: flex;
-  justify-content: center; /* centers horizontally */
+  justify-content: flex-start; /* centers horizontally */
   align-items: center;     /* centers vertically */
   flex-direction: column;  /* keeps caption under the image */
 }
 
-
+.slidesshow__caption {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #b29595;
+  text-align: center;
+  max-width: 90%;
+}
 pre {
   background-color: #4b4242;
   font-family: 'Courier New', Courier, monospace;
