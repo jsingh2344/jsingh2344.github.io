@@ -2175,7 +2175,7 @@ pre {
 }
 
 .writing {
-  max-width: 60ch;    /* limit line length (~60 characters wide) */
+  max-width: 120ch;    /* limit line length (~60 characters wide) */
   margin: 0 auto;     /* center the text block in the page */
   padding: 1rem;      /* optional breathing space inside */
 }
