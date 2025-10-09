@@ -2110,7 +2110,14 @@ margin: 0;
 	padding: 0 1rem;
 }
 
+img {
+  max-width: 100%;
+  max-height: 80vh;
+  height: auto;
+  width: auto;
+  object-fit: contain;
 
+}
 
 .slidesshow__slide {
   display: block;
@@ -2122,17 +2129,7 @@ margin: 0;
   margin: 5vh auto;   /* transparent margin, scales with screen size */
   object-fit: contain;
   overflow: hidden;
-
   align-items: center;
-}
-
-.slidesshow__slide img {
-  max-width: 100%;
-  max-height: 80vh;
-  height: auto;
-  width: auto;
-  object-fit: contain;
-  align
 }
 
 
