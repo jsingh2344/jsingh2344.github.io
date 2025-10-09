@@ -2072,7 +2072,7 @@ margin: 0;
     height: auto !important;  /* force natural height */
     margin: 5vh auto;           /* center horizontally */
     object-fit: contain;      /* makes sure it scales down inside the box */
-    overflow: hidden;
+    
 	}
   &__caption {
   margin-top: 0.5rem;
@@ -2123,6 +2123,7 @@ img {
 
   margin: 5vh auto;   /* transparent margin, scales with screen size */
   object-fit: contain;
+  overflow: hidden;
 }
 
 
