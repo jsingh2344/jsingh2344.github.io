@@ -1993,7 +1993,7 @@ button,
       height: inherit;
       left: 0;
       line-height: inherit;
-      position: relative;
+      position: absolute;
       text-indent: 0;
       top: 0;
       width: inherit; }
