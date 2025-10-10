@@ -2062,6 +2062,7 @@ margin: 0;
 		aspect-ratio: 1 / 1;
 		object-fit: cover;
 		display: block;
+    margin: 0.5em;
 	}
 
 	&__slide {
