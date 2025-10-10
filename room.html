@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Portrait of my Room</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+
+		<!-- Favicon for most browsers -->
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+
+		<!-- Fallback for older browsers -->
+		<link rel="icon" href="/favicon/favicon.ico" type="image/x-icon">
+
+		<!-- Mobile / Apple devices -->
+		<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+
+		<script src="assets/js/gallery.js"></script>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="home" class="logo"><strong>Jaden Singh</strong></a>
+									<ul class="icons">
+										<li><a href="https://www.instagram.com/jadensingh.art/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+	
+									</ul>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>Stills</h1>
+										<p>My Room, Fall 2024</p>
+									</header>
+
+									<!-- Image -->
+									
+								</section>
+								<!-- gallery-->
+								 <section>
+									<div class="section">
+										<div id="gallery"></div>
+
+										<script src="main.js"></script>
+										<script>
+											const tetonImages = [
+												"images/room/DSC_0791.jpg",
+												"images/room/DSC_0766.jpg",
+												"images/room/DSC_0769.jpg",
+												"images/room/DSC_0765.jpg",
+												"images/room/DSC_0763.jpg",
+												"images/room/DSC_0789.jpg",
+											];
+
+											const caps = [
+												"",
+												"",
+												"",
+												"",
+												"",
+												"",
+												
+											];
+
+											document.addEventListener("DOMContentLoaded", () => {
+												createSlideshow(tetonImages, caps, "#gallery");
+											});
+										</script>
+
+									</div>
+								 </section>
+						</div>
+					</div>
+				
+					<!-- Sidebar -->
+				 	<div id="sidebar_standin"></div>
+
+			</div>
+
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
