@@ -2056,7 +2056,7 @@ margin: 0;
 .slidesshow {
 	display: grid;
 	grid-template-columns: 4rem auto;
-	gap: 0.5rem;
+	gap: 1rem;
 
 	&__thumbnail {
 		aspect-ratio: 1 / 1;
