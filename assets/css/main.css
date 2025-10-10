@@ -2112,18 +2112,18 @@ margin: 0;
 
 img {
   max-width: 100%;
-  max-height: 80vh;
+  max-height: 80vh; /* never taller than 80% of viewport */
   height: auto;
   width: auto;
   object-fit: contain;
   display:block;
-  
+
 
 }
 
 .slidesshow__slide {
 
-  max-height: 80vh;   /* never taller than 80% of viewport */
+  max-height: 100vh;   
   width: auto;
   height: auto;
 
