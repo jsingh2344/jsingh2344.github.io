@@ -2062,7 +2062,6 @@ margin: 0;
 		aspect-ratio: 1 / 1;
 		object-fit: cover;
 		display: block;
-    margin: 0.5em;
 	}
 
 	&__slide {
@@ -2120,6 +2119,11 @@ img {
   display:block;
 
 
+}
+
+.slidesshow__thumbnail {
+  
+    margin: 0.5em;
 }
 
 .slidesshow__slide {
