@@ -2199,7 +2199,7 @@ pre {
   content: '\f0c9';
   position: absolute;
   font-size: 2em;
-  right: -2.5rem;   /* make it stick out */
+  right: -2.8rem;   /* make it stick out */
   height: 6.25rem;
   background:none;
   color: #fff;
