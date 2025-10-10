@@ -2143,6 +2143,7 @@ img {
   color: gray;
   text-align: center;
   max-width: 90%;
+  font-weight:800; /*bold */
 }
 pre {
   background-color: #4b4242;
