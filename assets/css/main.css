@@ -2106,7 +2106,7 @@ margin: 0;
 
 .section {
 	max-width: 1200px;
-	margin: 0;
+	margin: 1rem auto;
 	padding: 0 1rem;
 }
 
