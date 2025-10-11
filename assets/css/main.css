@@ -2029,7 +2029,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .content-image {
       max-height: 80vh;
-      max-width: 600px;   /* keeps it from being too wide */
+      max-width: 100%;   /* keeps it from being too wide */
       width: auto;        /* scales with smaller screens */
       height: auto;       /* keeps aspect ratio */
       display: block;
