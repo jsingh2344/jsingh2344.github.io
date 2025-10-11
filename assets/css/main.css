@@ -2097,7 +2097,7 @@ margin: 0;
 }
 	
 	&__sticky {
-		position: sticky;
+		position: sticky; 
 		display: grid;
 		gap: .5rem;
 		top: 1rem;
@@ -2106,7 +2106,7 @@ margin: 0;
 
 .section {
 	max-width: 1200px;
-	margin: 1rem auto;
+	margin: 0;
 	padding: 0 1rem;
 }
 
