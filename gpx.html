@@ -1,0 +1,346 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Selected Visualizations</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+
+        <!-- Favicon for most browsers -->
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+
+		<!-- Fallback for older browsers -->
+		<link rel="icon" href="/favicon/favicon.ico" type="image/x-icon">
+
+		<!-- Mobile / Apple devices -->
+		<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+
+		
+		
+		<script src="assets/js/gallery.js"></script>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="" class="logo"><strong>Jaden Singh</strong></a>
+									<ul class="icons">
+										<li>
+											<a href="https://www.instagram.com/jadensingh.art/" class="icon brands fa-instagram">
+												<span class="label">Instagram</span>
+											</a>
+										</li>
+										<li>
+											<a href="https://github.com/jsingh2344" class="icon brands fa-github">
+												<span class="label">GitHub</span>
+											</a>
+										</li>
+									</ul>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>GPX Adjuster</h1>
+									</header>
+
+									<!-- Image -->
+									
+								</section>
+								<div class="writing">
+									<article id="gpx-adjuster">
+									<header>
+										<h1>GPX Adjuster</h1>
+									</header>
+
+									<p>
+										To this point, I've recorded all of my Strava activities using my iPhone. In Washington, D.C., the distance and elevation figures seem mostly accurate, but in Wyoming, they can be obviously, and wildly, inaccurate. For example: in August 2025, I climbed a version of the Cathedral Traverse in the Tetons. A realistic mileage/elevation split would maybe be 15 miles and 10k elevation gained. Instead,
+										<a href="https://www.strava.com/activities/15429093664" target="_blank" rel="noopener noreferrer">my Strava activity</a>
+										says that I moved 25 miles and climbed 24,000 vertical feet.
+									</p>
+
+									<p>
+										Even worse, analyzing the raw GPX track yields an even more outlandish 42 miles traveled. This would be impressive, but it is blatantly wrong.
+									</p>
+
+									<figure>
+										<img width="2412" height="1084" alt="Raw GPX analysis showing unrealistic mileage" src="https://github.com/user-attachments/assets/c8c0e5ee-1307-4da3-ae78-b8fde02cfc66" />
+									</figure>
+
+									<p>
+										The likely issue seems to be that the GPX logging does a lot of extra zigging and zagging over short distances. Looking closely at the track for the Cathedral Traverse, the overall track looks good.
+									</p>
+
+									<figure>
+										<img width="2040" height="1539" alt="Overall Cathedral Traverse GPX track" src="https://github.com/user-attachments/assets/82da6917-3ff1-422d-9cb9-5abe3c3ac892" />
+									</figure>
+
+									<p>But zooming in, there's a lot of stuff like this:</p>
+
+									<figure>
+										<img width="2296" height="1264" alt="Zoomed-in GPS jitter in the GPX track" src="https://github.com/user-attachments/assets/96c6bc65-c063-46d6-9c9a-d78a63b824ae" />
+									</figure>
+
+									<p>This is a particularly heinous section around East Prong:</p>
+
+									<figure>
+										<img width="2298" height="1380" alt="GPS jitter around East Prong" src="https://github.com/user-attachments/assets/9df23232-139e-44ec-8470-b88e027f5b36" />
+									</figure>
+
+									<section>
+										<h2>Current fix</h2>
+
+										<p>
+										My fairly simplistic solution is to enforce a minimum distance between points. A reasonable start is 10m, which means that moving along the GPX track, I throw out each point that is not at least 10 meters from the previous kept point. This produced this new red track:
+										</p>
+
+										<figure>
+										<img width="2106" height="1070" alt="Adjusted GPX track after applying a minimum point distance" src="https://github.com/user-attachments/assets/82d46d1a-21cc-4da8-81dd-4d7009e7dc31" />
+										</figure>
+
+										<figure>
+										<img width="2186" height="1342" alt="Zoomed adjusted GPX track after filtering short-distance jitter" src="https://github.com/user-attachments/assets/80692db9-ab0d-4b12-97aa-83e414ccdb29" />
+										</figure>
+
+										<p>
+										Which definitely cuts down on erroneous zigging. It is worth noting that for that section around East Prong, there was some real-life zigging going on as well.
+										</p>
+
+										<p>
+										But what is the best minimum distance to use? Again using the Cathedral Traverse track, I tested what the total distance/elevation effect would be at each adjustment level from 0m to 30m. First, here is the proportion of GPX points kept after each adjustment level:
+										</p>
+
+										<figure>
+										<img width="1580" height="1400" alt="Table showing proportion of GPX points kept at each adjustment level" src="https://github.com/user-attachments/assets/e7be9c91-6887-44f1-a458-fc2de642a8f5" />
+										</figure>
+
+										<p>And then the overall effect on the stats:</p>
+
+										<figure>
+										<img width="2000" height="1200" alt="Plot showing adjusted distance and elevation gain by minimum movement threshold" src="https://github.com/user-attachments/assets/5d1f97b8-e504-493a-9ecd-418dceb5cf9c" />
+										</figure>
+
+										<p>
+										Going off my priors, it looks like 15 meters is the best number to use here. But does this hold in general?
+										</p>
+									</section>
+
+									<section>
+										<h2>Short threshold analysis</h2>
+
+										<p>
+										I downloaded seven GPX tracks off of Strava where I could reasonably estimate truth values for mileage and elevation, and used those to isolate a single minimum distance threshold that minimizes the mean absolute distance error across all seven. All of this logic, which involves the resampling analysis above, is contained in <code>calibrate_gpx_threshold.py</code>, and the sample GPX tracks I used are in the <code>input_gpx</code> folder. A figure summarizing the results is below:
+										</p>
+
+										<figure>
+										<img width="2000" height="1200" alt="Threshold calibration summary plot" src="https://github.com/user-attachments/assets/e807c372-3566-427e-8537-fdf259908b12" />
+										</figure>
+
+										<p>
+										For each minimum distance threshold from 0 to 30 meters, the average absolute distance error, average directional distance error, and the average absolute elevation error are plotted. In this analysis I prioritized the absolute distance error, which is minimized when using a 16m minimum distance threshold — quite close to the 15m that suited the Cathedral Traverse track. Specific error values for each GPX track at a 16m threshold are shown below:
+										</p>
+
+										<figure>
+										<img width="2200" height="1200" alt="Per-track error values at a 16 meter threshold" src="https://github.com/user-attachments/assets/6e7124d0-0ad9-4010-a4b8-d6400f66441f" />
+										</figure>
+									</section>
+
+									<section>
+										<h2>Notes on usage</h2>
+
+										<section>
+										<h3><code>calibrate_gpx_threshold.py</code></h3>
+
+										<p>
+											To run this script, you need paths to a folder of GPX files and to a CSV file that contains “truth” distance and elevation values. This CSV file should take on the following example structure:
+										</p>
+
+										<table>
+											<thead>
+											<tr>
+												<th>File</th>
+												<th>Mi</th>
+												<th>Elev</th>
+											</tr>
+											</thead>
+											<tbody>
+											<tr>
+												<td>cathy.gpx</td>
+												<td>16</td>
+												<td>11000</td>
+											</tr>
+											<tr>
+												<td>loop.gpx</td>
+												<td>28</td>
+												<td>11000</td>
+											</tr>
+											<tr>
+												<td>moran.gpx</td>
+												<td>20</td>
+												<td>6000</td>
+											</tr>
+											</tbody>
+										</table>
+
+										<p>Then, to run the calibration, use this command:</p>
+
+										<pre><code>python3 calibrate_gpx_threshold.py [csv_path] --gpx-dir [gpx_folder]</code></pre>
+
+										<p>To control the thresholds being tested, use the following:</p>
+
+										<pre><code>python3 calibrate_gpx_threshold.py [csv_path] --gpx-dir [gpx_folder] --start 0 --stop 30 --step 0.5</code></pre>
+
+										<p>
+											This would conduct a threshold search starting at 0 meters, testing up to 30 meters, and going by 0.5 meter increments in between.
+										</p>
+
+										<p>Diagnostic results are written to:</p>
+
+										<ul>
+											<li><code>threshold_calibration_per_track_results.csv</code></li>
+											<li><code>threshold_calibration_summary.csv</code></li>
+											<li><code>threshold_calibration_summary.png</code></li>
+											<li><code>threshold_calibration_best_threshold_track_errors.png</code></li>
+										</ul>
+										</section>
+
+										<section>
+										<h3><code>gpx_adjuster.py</code></h3>
+
+										<p>
+											This file deals with a single GPX track and, depending on provided values, outputs a modified track along with new distance/elevation figures.
+										</p>
+
+										<h4>Basic usage</h4>
+
+										<pre><code>python3 gpx_adjuster.py input.gpx --min-move 10</code></pre>
+
+										<p>
+											This prints the raw and adjusted distance/elevation gain, then saves a cleaned GPX file containing only the retained GPX track, using a minimum 10 meter distance between points.
+										</p>
+
+										<p>Example output:</p>
+
+										<table>
+											<thead>
+											<tr>
+												<th>Metric</th>
+												<th>Value</th>
+											</tr>
+											</thead>
+											<tbody>
+											<tr>
+												<td>Raw distance</td>
+												<td>42.22 mi</td>
+											</tr>
+											<tr>
+												<td>Adjusted distance</td>
+												<td>18.09 mi</td>
+											</tr>
+											<tr>
+												<td>Distance difference</td>
+												<td>24.13 mi</td>
+											</tr>
+											<tr>
+												<td>Raw elevation gain</td>
+												<td>92,589 ft</td>
+											</tr>
+											<tr>
+												<td>Adjusted elevation gain</td>
+												<td>23,506 ft</td>
+											</tr>
+											<tr>
+												<td>Elevation gain difference</td>
+												<td>69,083 ft</td>
+											</tr>
+											<tr>
+												<td>Min move threshold</td>
+												<td>10 m</td>
+											</tr>
+											<tr>
+												<td>Kept points</td>
+												<td>2,662 / 76,757</td>
+											</tr>
+											<tr>
+												<td>Saved adjusted GPX</td>
+												<td><code>input_adjusted_10m.gpx</code></td>
+											</tr>
+											</tbody>
+										</table>
+
+										<h4>Choose an output GPX filename</h4>
+
+										<pre><code>python3 gpx_adjuster.py input.gpx --min-move 10 --output-gpx cleaned_10m.gpx</code></pre>
+
+										<h4>Run diagnostics</h4>
+
+										<pre><code>python3 gpx_adjuster.py input.gpx --diagnostic</code></pre>
+
+										<p>
+											Diagnostic mode tests thresholds from 0 m to 30 m in 2 m increments. It prints a table of adjusted distance, elevation gain, and kept-point counts at each threshold.
+										</p>
+
+										<p>It also saves:</p>
+
+										<ul>
+											<li><code>input_diagnostic.png</code></li>
+											<li><code>input_kept_points_table.png</code></li>
+										</ul>
+
+										<h4>Custom diagnostic thresholds</h4>
+
+										<pre><code>python3 gpx_adjuster.py input.gpx --diagnostic --thresholds 0,3,5,8,10,15,20</code></pre>
+
+										<h4>Custom plot/table output paths</h4>
+
+										<pre><code>python3 gpx_adjuster.py input.gpx --diagnostic \
+									--plot-path diagnostic_plot.png \
+									--table-path kept_points_table.png</code></pre>
+
+										<h4>Optional speed filter</h4>
+
+										<pre><code>python3 gpx_adjuster.py input.gpx --min-move 10 --max-speed 20</code></pre>
+
+										<p>
+											<code>--max-speed</code> rejects segments faster than the given speed in meters per second. This can remove large GPS jumps, though most alpine GPX overestimation is often caused by small repeated jitter rather than obvious high-speed spikes.
+										</p>
+
+										<h4>Notes</h4>
+
+										<p>
+											The <code>--min-move</code> value is in meters. A larger value removes more GPS noise but also simplifies the track more aggressively. For noisy mountain tracks, values around 8–20 m may be useful, but the best threshold depends on the device, terrain, and route.
+										</p>
+
+										<p>
+											The adjusted GPX distance should be treated as an estimate, not an exact measurement.
+										</p>
+										</section>
+									</section>
+									</article>
+								</div>
+                                
+						</div>
+					</div>
+				
+					<!-- Sidebar -->
+				 	<div id="sidebar_standin"></div>
+
+			</div>
+
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
