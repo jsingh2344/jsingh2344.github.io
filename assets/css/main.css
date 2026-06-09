@@ -2301,3 +2301,11 @@ pre {
     z-index: 9999;
   }
 }
+
+.portrait-img {
+  width: 75%;
+  max-width: 625px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
