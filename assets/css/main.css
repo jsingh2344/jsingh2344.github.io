@@ -2228,11 +2228,11 @@ pre {
 
     display: inline-block;
 
-    color: orange;
+    color: blue;
 
     cursor: help;
 
-    border-bottom: 1px dotted orange;
+    border-bottom: 1px dotted blue;
 
   }
 
@@ -2256,15 +2256,16 @@ pre {
 
     position: absolute;
 
-    z-index: 10;
+    z-index: 9999;
 
-    bottom: 130%;
+    top: 100%;
 
     left: 50%;
 
     transform: translateX(-50%);
 
     transition: opacity 0.2s ease;
+    pointer-events: auto;
 
     font-size: 0.9em;
 
@@ -2272,7 +2273,8 @@ pre {
 
   }
 
-  .tooltip:hover .tooltip-text {
+  .tooltip:hover .tooltip-text,
+  .tooltip:focus-within .tooltip-text {
 
     visibility: visible;
 
@@ -2282,7 +2284,7 @@ pre {
 
   .tooltip .tooltip-text a {
 
-    color: orange;
+    color: blue;
 
     text-decoration: underline;
 
