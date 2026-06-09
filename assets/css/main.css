@@ -2228,11 +2228,11 @@ pre {
 
     display: inline-block;
 
-    color: blue;
+    color: orange;
 
     cursor: help;
 
-    border-bottom: 1px dotted blue;
+    border-bottom: 1px dotted orange;
 
   }
 
@@ -2284,7 +2284,7 @@ pre {
 
   .tooltip .tooltip-text a {
 
-    color: blue;
+    color: orange;
 
     text-decoration: underline;
 
