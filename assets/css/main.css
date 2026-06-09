@@ -2288,3 +2288,16 @@ pre {
 
 
   }
+
+  @media screen and (max-width: 736px) {
+  .tooltip .tooltip-text {
+    position: fixed;
+    left: 1rem;
+    right: 1rem;
+    top: auto;
+    bottom: 1rem;
+    width: auto;
+    transform: none;
+    z-index: 9999;
+  }
+}
