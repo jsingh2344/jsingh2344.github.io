@@ -2300,15 +2300,4 @@ pre {
     transform: none;
     z-index: 9999;
   }
-
-  .tooltip:hover .tooltip-text,
-  .tooltip:focus-within .tooltip-text {
-    visibility: hidden;
-    opacity: 0;
-  }
-
-  .tooltip:active .tooltip-text {
-    visibility: visible;
-    opacity: 1;
-  }
 }
