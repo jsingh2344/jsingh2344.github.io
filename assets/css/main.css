@@ -2289,15 +2289,21 @@ pre {
 
   }
 
-  @media screen and (max-width: 736px) {
+@media screen and (max-width: 736px) {
+  .tooltip {
+    border-bottom: none;
+  }
+
   .tooltip .tooltip-text {
-    position: fixed;
-    left: 1rem;
-    right: 1rem;
-    top: auto;
-    bottom: 1rem;
+    visibility: visible;
+    opacity: 1;
+    position: static;
+    display: inline;
     width: auto;
+    background: none;
+    color: inherit;
+    padding: 0;
     transform: none;
-    z-index: 9999;
+    font-size: inherit;
   }
 }
