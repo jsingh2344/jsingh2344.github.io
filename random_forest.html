@@ -67,16 +67,17 @@
 
 									<p>Using this color key:</p>
 
-									<pre><code>class_palette = [ "419bdf",  # 0 water: medium blue
-										"397d49",  # 1 trees: dark green
-										"88b053",  # 2 grass: light olive green
-										"7a87c6",  # 3 flooded vegetation: muted blue-purple
-										"e49635",  # 4 crops: orange
-										"dfc35a",  # 5 shrub/scrub: yellow-tan
-										"c4281b",  # 6 built: red
-										"a59b8f",  # 7 bare: gray-beige
-										"b39fe1",  # 8 snow/ice: light purple ]</code></pre>
-
+									<ul>
+										<li><span style="color:#419bdf;">#419bdf</span> — 0 water: medium blue</li>
+										<li><span style="color:#397d49;">#397d49</span> — 1 trees: dark green</li>
+										<li><span style="color:#88b053;">#88b053</span> — 2 grass: light olive green</li>
+										<li><span style="color:#7a87c6;">#7a87c6</span> — 3 flooded vegetation: muted blue-purple</li>
+										<li><span style="color:#e49635;">#e49635</span> — 4 crops: orange</li>
+										<li><span style="color:#dfc35a;">#dfc35a</span> — 5 shrub/scrub: yellow-tan</li>
+										<li><span style="color:#c4281b;">#c4281b</span> — 6 built: red</li>
+										<li><span style="color:#a59b8f;">#a59b8f</span> — 7 bare: gray-beige</li>
+										<li><span style="color:#b39fe1;">#b39fe1</span> — 8 snow/ice: light purple</li>
+									</ul>
 									<p>Dynamic World maps Jackson Hole like this:</p>
 
 									<p>
@@ -99,22 +100,33 @@
 											To predict class, I am using Sentinel-2 and DEM data. These are the features I used, with the bottom 3 derived purely from a DEM:
 										</p>
 
-										<pre><code>features = [ # Sentinel-2 reflectance
-										"B2", "B3", "B4",      # blue, green, red
-										"B8",                 # near infrared
-										"B11", "B12",         # shortwave infrared
-
-										# Spectral indices
-										"NDVI",               # vegetation greenness
-										"NDWI",               # water / wetness
-										"NDSI",               # snow / ice
-										"BSI",                # bare soil / rock tendency
-
-										# Terrain
-										"elevation",
-										"slope",
-										"aspect" ]</code></pre>
-
+										<ul>
+											<li>
+												<strong>Sentinel-2 reflectance</strong>
+												<ul>
+													<li><code>B2</code>, <code>B3</code>, <code>B4</code> — blue, green, red</li>
+													<li><code>B8</code> — near infrared</li>
+													<li><code>B11</code>, <code>B12</code> — shortwave infrared</li>
+												</ul>
+											</li>
+											<li>
+												<strong>Spectral indices</strong>
+												<ul>
+													<li><code>NDVI</code> — vegetation greenness</li>
+													<li><code>NDWI</code> — water / wetness</li>
+													<li><code>NDSI</code> — snow / ice</li>
+													<li><code>BSI</code> — bare soil / rock tendency</li>
+												</ul>
+											</li>
+											<li>
+												<strong>Terrain</strong>
+												<ul>
+													<li><code>elevation</code></li>
+													<li><code>slope</code></li>
+													<li><code>aspect</code></li>
+												</ul>
+											</li>
+										</ul>
 										<p>
 											A single composite Sentinel-2 image was produced by taking the median of each reflectance band (B2, B3, B4, B8, B11, B12) across the summer months, and then calculating the spectral indices using those medians. Then, out of a random sample of 1600 pixels across the AOI (200 of each relevant class), 70 percent were sorted into a training set and 30 percent into a validation set. Finally, applying Random Trees classification produced:
 										</p>
