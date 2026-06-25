@@ -254,8 +254,36 @@
 											<img width="857" height="1000" alt="image" src="https://github.com/user-attachments/assets/19edd7cc-0af3-4845-be53-97a880eecbd6" />
 										</p>
 
-										<p style="font-style:italic; font-weight:900;"> <a href="https://drive.google.com/file/d/120TCLUTZgQh9pSzX4kxjo5djrROSuL0q/view?usp=sharing" target="_blank" rel="noopener noreferrer">Link to classifier map with topo overlay </a></p>
+										<section>
+											<h2>Topo comparison</h2>
 
+											<p>
+												Overlaying this classification map with USGS's National Map Topo (link to that is
+												<a href="https://drive.google.com/file/d/120TCLUTZgQh9pSzX4kxjo5djrROSuL0q/view?usp=sharing" target="_blank" rel="noopener noreferrer">here</a>)
+												reveals a few things. First, there is a consistent pattern of snow-classified pixels overestimating snow cover in some spots, and underestimating it in others. Avalanche and Garnet Canyons provide good examples:
+											</p>
+
+											<p>
+												<img width="2060" height="1260" alt="image" src="https://github.com/user-attachments/assets/124e5c9d-b72d-4ecf-bc5f-71acb5888a08" />
+											</p>
+
+											<p>
+												Higher-elevation regions are receiving higher percentages of snow-classification than the topo would suggest. For starters, Icefloe Lake is completely frozen, and the basins north and south of Avalanche Divide have large estimated snowfields that the topo disagrees with. This pattern is particularly dominant in north-facing slopes, and disappears below around 9000 feet -- note that in particular, Snowdrift Lake is classified as half ice-covered, while Taminah lower in the canyon is classified as ice-free. But given how I've defined my truth values from Dynamic World, and how the USGS Topo likely works, this is a pretty obvious and sensible issue: I'm just estimating the snow cover during the median day of the summer, and topos tend to only plot non-seasonal, permanent icefields that persist through the whole year.
+											</p>
+
+											<p>
+												<img width="1458" height="1042" alt="image" src="https://github.com/user-attachments/assets/a5553386-38f3-4737-b623-d4e892f64e94" />
+											</p>
+
+											<p>
+												Zooming in on the glacial core of the range, the opposite dynamic emerges. I'm predicting less snow specifically at the tails of glacial snowfields.
+												In varying degrees, the ends of Middle Teton Glacier, Teepe Glacier, Teton Glacier, and the large snowfield just northwest of Disappointment Peak's summit (which I'm lumping in here, since it actually shows the second biggest moraine of this group) are classified as bare rock. This is an interesting result of glacial retreat: snow/ice exists in the topo in this discrepancy zone purely because it moved downhill from the accumulation zone, and not because there is a local terrain condition that allows snow to persist there throughout the year. The middle-of-summer classification doesn't overpredict in these zones because had they not existed at the bottom of glaciers, they would never have allowed for year-round snow independently.
+											</p>
+
+											<p>
+												Which, incidentally, reaffirms that the Disappointment snowfield is probably about as proper of a "glacier" as several of the official ones in the Teton Range.
+											</p>
+										</section>
 									
 									</section>
 									
