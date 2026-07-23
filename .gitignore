@@ -1,2 +1,6 @@
 Maps/teton_classifier_map.png
 Maps/teton_classifier_topo.png
+
+# Private account exports. The listening page publishes only an aggregated,
+# privacy-safe JSON file generated from these local files.
+/Data/

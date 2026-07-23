@@ -1,0 +1,190 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<title>Listening Atlas — Jaden Singh</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta
+			name="description"
+			content="Seven years of Spotify listening, viewed through artists, albums, and places."
+		/>
+		<meta property="og:title" content="Listening Atlas — Jaden Singh" />
+		<meta
+			property="og:description"
+			content="Monthly artist and album listening totals from 2019 to 2026."
+		/>
+		<meta property="og:type" content="website" />
+		<meta property="og:image" content="https://jsingh2344.github.io/images/listening-atlas-og-simple.png" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/listening-atlas.css" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+	</head>
+	<body class="is-preload listening-atlas-page">
+		<div id="wrapper">
+			<div id="main">
+				<div class="inner">
+					<header id="header">
+						<a href="home" class="logo"><strong>Jaden Singh</strong></a>
+						<ul class="icons">
+							<li>
+								<a href="https://www.instagram.com/jadensingh.art/" class="icon brands fa-instagram">
+									<span class="label">Instagram</span>
+								</a>
+							</li>
+							<li>
+								<a href="https://github.com/jsingh2344" class="icon brands fa-github">
+									<span class="label">GitHub</span>
+								</a>
+							</li>
+						</ul>
+					</header>
+
+					<section class="atlas-intro">
+						<header class="main">
+							<h1>Listening Atlas</h1>
+							<p>2019—2026</p>
+						</header>
+						<p class="atlas-lede">
+							Spotify listening history summarized by month, artist, album,
+							track, and approximate location.
+						</p>
+					</section>
+
+					<section class="chart-section" aria-labelledby="artists-title">
+						<header class="major"><h2 id="artists-title">Artists over time</h2></header>
+						<p>
+							Monthly hours for the 30 most-listened-to artists in the archive.
+							A line at zero means I did not listen to that artist during that month.
+							The top 10 are highlighted initially; select names to highlight or
+							unhighlight any combination.
+						</p>
+						<div class="line-chart">
+							<canvas
+								id="artist-chart"
+								role="img"
+								aria-label="Monthly listening hours for prominent artists from 2019 to 2026"
+							></canvas>
+							<div class="chart-tooltip" id="artist-tooltip" role="status" aria-live="polite"></div>
+						</div>
+						<div class="chart-legend" id="artist-legend" aria-label="Choose an artist"></div>
+					</section>
+
+					<section class="chart-section" aria-labelledby="albums-title">
+						<header class="major"><h2 id="albums-title">Albums over time</h2></header>
+						<p>
+							The same view for the 30 most-listened-to albums. Each point is
+							the number of hours spent with that album in a calendar month.
+							The top 10 are highlighted initially.
+						</p>
+						<div class="line-chart">
+							<canvas
+								id="album-chart"
+								role="img"
+								aria-label="Monthly listening hours for prominent albums from 2019 to 2026"
+							></canvas>
+							<div class="chart-tooltip" id="album-tooltip" role="status" aria-live="polite"></div>
+						</div>
+						<div class="chart-legend" id="album-legend" aria-label="Choose an album"></div>
+					</section>
+
+					<section class="chart-section" aria-labelledby="tracks-title">
+						<header class="major"><h2 id="tracks-title">Vocal tracks over time</h2></header>
+						<p>
+							Monthly hours for the 30 most-listened vocal tracks. The top 10
+							are highlighted initially. The export has no vocals field, so
+							classical, soundtrack, ambient, and known instrumental artists
+							are excluded before ranking.
+						</p>
+						<div class="line-chart">
+							<canvas
+								id="track-chart"
+								role="img"
+								aria-label="Monthly listening hours for prominent vocal tracks from 2019 to 2026"
+							></canvas>
+							<div class="chart-tooltip" id="track-tooltip" role="status" aria-live="polite"></div>
+						</div>
+						<div class="chart-legend" id="track-legend" aria-label="Choose a vocal track"></div>
+					</section>
+
+					<section aria-labelledby="places-title">
+						<header class="major"><h2 id="places-title">Listening by place</h2></header>
+						<p>
+							Approximate location periods with total listening time and the
+							most-listened artist and track.
+						</p>
+						<div class="place-list"></div>
+					</section>
+
+					<section aria-labelledby="years-title">
+						<header class="major"><h2 id="years-title">Year by year</h2></header>
+						<div class="table-wrapper">
+							<table class="year-table">
+								<thead>
+									<tr>
+										<th>Year</th>
+										<th>Most-listened artist</th>
+										<th>Most-listened track</th>
+										<th>Hours</th>
+									</tr>
+								</thead>
+								<tbody></tbody>
+							</table>
+						</div>
+					</section>
+
+					<section class="method-note" aria-labelledby="method-title">
+						<header class="major"><h2 id="method-title">About the data</h2></header>
+						<p>
+							This page uses my Spotify Extended Streaming History. Plays under
+							30 seconds are removed, then listening time is grouped by month.
+							The private export is not part of the published site; only this
+							aggregated summary is loaded here.
+						</p>
+					</section>
+
+					<section class="daily-section" aria-labelledby="daily-title">
+						<header class="major"><h2 id="daily-title">Listening by day</h2></header>
+						<p>
+							Each square is one calendar day. Color intensity represents total
+							minutes listened.
+						</p>
+						<div class="daily-key" aria-hidden="true">
+							<span>0 min</span>
+							<i data-level="0"></i>
+							<i data-level="1"></i>
+							<i data-level="2"></i>
+							<i data-level="3"></i>
+							<i data-level="4"></i>
+							<i data-level="5"></i>
+							<span>360+ min</span>
+						</div>
+						<div
+							class="daily-calendar"
+							role="img"
+							aria-label="Daily listening minutes from 2019 through 2026"
+						></div>
+					</section>
+				</div>
+			</div>
+
+			<div id="sidebar_standin"></div>
+		</div>
+
+		<noscript>
+			<p class="atlas-error">JavaScript is required to draw the listening charts.</p>
+		</noscript>
+
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+		<script src="assets/data/listening-atlas-data.js"></script>
+		<script src="assets/js/listening-atlas.js"></script>
+	</body>
+</html>
